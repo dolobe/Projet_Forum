@@ -1,0 +1,72 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: grey;
+    height: 300vh;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: black;
+}
+
+.logo {
+    font-size: 1.5em;
+    color: #fff;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+
+.links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.search-btn {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.search-btn:hover {
+    background-color: #444;
+}
+
+.search-btn img {
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    margin-right: 5px;
+}
