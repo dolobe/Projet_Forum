@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-func HandleHomePage(w http.ResponseWriter, r *http.Request) {
-	htmlFile, err := ioutil.ReadFile("templates/Home.html")
+func HandleLoginPage(w http.ResponseWriter, r *http.Request) {
+	htmlFile, err := ioutil.ReadFile("templates/LoginPage.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
