@@ -77,3 +77,26 @@ input[type="text"] {
 .search-container input[type="text"] {
     margin-right: 5px;
 }
+
+#categoryDropdown {
+    position: absolute;
+    margin-right: 20%;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    height: 30%;
+    width: 97.5%;
+    border: 1px solid #ccc;
+    margin-top: 18%;
+}
+
+#categoryDropdown li {
+    text-decoration: none;
+    display: flex;
+    padding: 10px 16px;
+}
+
+#categoryDropdown li:hover {
+    background-color: #f1f1f1;
+    display: flex;
+}
+
