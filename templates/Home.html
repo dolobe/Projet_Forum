@@ -16,11 +16,23 @@
                     <button class="search-btn" alt="Rechercher"></button>
                 </div>
                 <div class="links">
-                    <a href="#">About & Home</a>
-                    <a href="#">Category</a>
+                    <a href="/">About & Home</a>
+                    <a href="#" id="categoryLink" >Category</a>
                     <a href="/Login">Log In</a>
                     <a href="/signup">Sign up</a>
                 </div>
+                
+                <div id="categoryDropdown" style="display: none;">
+                    <ul id="categoryList">
+                        <li><a href="/Login">Game</a></li>
+                        <li><a href="/Login">Health</a></li>
+                        <li><a href="/Login">Food</a></li>
+                        <li><a href="/Login">Song</a></li>
+                        <li><a href="/Login">Movie</a></li>
+                        <li><a href="/Login">Book</a></li>
+                    </ul>
+                </div>
+
             </div>
         </header>
         <section class="about-home">
@@ -37,8 +49,7 @@
                 <p>Nous vous invitons à vous joindre à notre communauté en vous inscrivant sur notre forum. En tant que membre, vous pourrez participer aux discussions, poser des questions, partager vos connaissances et interagir avec d'autres passionnés de [sujet du forum]. Rejoignez-nous dès aujourd'hui et faites partie de cette incroyable communauté!</p>
             </div>
         </section>
-        <script>
-        </script>
     </div>
+    <script src="assets/js/HomeCategory.js"></script>
 </body>
 </html>
