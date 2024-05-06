@@ -12,6 +12,7 @@ func main() {
 	http.HandleFunc("/", handlers.HandleHomePage)
 	http.HandleFunc("/Login", handlers.HandleLoginPage)
 	http.HandleFunc("/signup", handlers.HandleSignupPage)
+	http.HandleFunc("/category", handlers.HandleCategoryPage)
 
 	fmt.Println("Démarrage du serveur sur le port 8080")
 	err := http.ListenAndServe(":8080", nil)
