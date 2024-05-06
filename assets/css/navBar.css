@@ -71,12 +71,20 @@ input[type="text"] {
 }
 
 #categoryDropdown li {
-    text-decoration: none;
     display: flex;
     padding: 10px 16px;
 }
 
 #categoryDropdown li:hover {
     background-color: #f1f1f1;
-    display: flex;
+    text-decoration: underline;
+}
+
+#categoryDropdown a {
+    color: black;
+    text-decoration: none;
+}
+
+#categoryDropdown a:hover {
+    text-decoration: underline;
 }
