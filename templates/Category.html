@@ -8,29 +8,102 @@
 </head>
 <body>
     <div class="body">
-            <div class="navbar">
-                <div class="logo">FORUM</div>
-                <div class="search-container">
-                    <input type="text" placeholder="Search...">
-                    <button class="search-btn" alt="Rechercher"></button>
-                </div>
-                <div class="links">
-                    <a href="/">About & Home</a>
-                    <a href="#" id="categoryLink" >Category</a>
-                    <a href="/Login">username</a>
-                </div>
-                
-                <div id="categoryDropdown" style="display: none;">
-                    <ul id="categoryList">
-                        <li><a href="/Login">Game</a></li>
-                        <li><a href="/Login">Health</a></li>
-                        <li><a href="/Login">Food</a></li>
-                        <li><a href="/Login">Song</a></li>
-                        <li><a href="/Login">Movie</a></li>
-                        <li><a href="/Login">Book</a></li>
+        <div class="navbar">
+            <div class="logo">FORUM</div>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button class="search-btn" alt="Rechercher"></button>
+            </div>
+            <div class="links">
+                <a href="/">About & Home</a>
+                <a href="/category" id="categoryLink" >Category</a>
+                <a href="#">Username</a>
+            </div>
+            
+            <div id="categoryDropdown" style="display: none;">
+                <ul id="categoryList">
+                    <li><a href="/Game">Game</a></li>
+                    <li><a href="/Health">Food</a></li>
+                    <li><a href="/Song">Song</a></li>
+                    <li><a href="/Movie">Movie</a></li>
+                    <li><a href="/Book">Book</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="category-item">
+                <div class="category-title"><a href="/Game">Game</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">Quel est votre jeu préféré et pourquoi ? </a></li>
+                        <li><a href="#">Quel genre de jeux aimez-vous le plus ?</a></li>
+                        <li><a href="#">Préfériez-vous jouer seul ou avec d'autres personnes ?</a></li>
+                        <li><a href="#">Pensez-vous que les jeux vidéo peuvent avoir un impact positif sur la vie des gens ? Si oui, pourquoi ?</a></li>
+                        <li><a href="#">Quel est le souvenir de jeu vidéo le plus marquant que vous ayez ?</a></li>
                     </ul>
                 </div>
             </div>
+            <div class="category-item">
+                <div class="category-title"><a href="/Health">Health</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">Quelle est la différence entre un virus et une bactérie ?</a></li>
+                        <li><a href="#">Quels sont les symptômes d'une crise cardiaque ?</a></li>
+                        <li><a href="#">Comment peut-on prévenir le cancer ?</a></li>
+                        <li><a href="#">Quelle est la meilleure façon de perdre du poids ?</a></li>
+                        <li><a href="#">Combien d'heures de sommeil par nuit faut-il à un adulte ?</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category-title"><a href="/Food">Food</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">Quel est votre plat préféré et pourquoi ?</a></li>
+                        <li><a href="#">Quelle est la cuisine du monde que vous aimez le plus et pourquoi ?</a></li>
+                        <li><a href="#">Avez-vous des allergies alimentaires ou des restrictions alimentaires ?</a></li>
+                        <li><a href="#">Quel est votre souvenir culinaire le plus marquant ?</a></li>
+                        <li><a href="#">Aimez-vous cuisiner ou manger au restaurant ?</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category-title"><a href="/Song">Song</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">Quel est votre genre musical préféré et pourquoi ?</a></li>
+                        <li><a href="#">Quelle est votre chanson préférée de tous les temps et pourquoi ?</a></li>
+                        <li><a href="#">Avez-vous un instrument de musique que vous aimez jouer ?</a></li>
+                        <li><a href="#">Préférez-vous écouter de la musique en live ou au casque ?</a></li>
+                        <li><a href="#">La musique vous évoque-t-elle des souvenirs particuliers ?</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category-title"><a href="/Movie">Movie</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">Quel est votre film préféré et pourquoi ?</a></li>
+                        <li><a href="#">Quel genre de films aimez-vous regarder ?</a></li>
+                        <li><a href="#">Préférez-vous regarder des films au cinéma ou à la maison ?</a></li>
+                        <li><a href="#">Quel est le dernier film que vous avez vu ?</a></li>
+                        <li><a href="#">Recommanderriez-vous ce film à d'autres personnes ?</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category-title"><a href="/Book">Book</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">Quel est votre livre préféré et pourquoi ?</a></li>
+                        <li><a href="#">Quel genre de livres aimez-vous lire ?</a></li>
+                        <li><a href="#">Préférez-vous lire des livres numériques ou des livres papier ?</a></li>
+                        <li><a href="#">Quel est le dernier livre que vous avez lu ?</a></li>
+                        <li><a href="#">Recommanderriez-vous ce livre à d'autres personnes ?</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <link rel="stylesheet" href="assets/css/Category.css">
     <script src="assets/js/HomeCategory.js"></script>
