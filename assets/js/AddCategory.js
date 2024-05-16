@@ -30,7 +30,8 @@ function addCategory() {
     newCategory.appendChild(categoryContainer);
 
     const categoryList = document.querySelector(".container");
-    categoryList.appendChild(newCategory);
+    const secondCategory = categoryList.children[1];
+    categoryList.insertBefore(newCategory, secondCategory);
 
     document.getElementById("cat").value = "";
     document.getElementById("sub").value = "";
