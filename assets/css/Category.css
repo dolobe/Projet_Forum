@@ -36,3 +36,24 @@
 .category-container ul li {
     margin-top: 1%;
 }
+
+.category-container label {
+    margin-left: 1%;
+}
+
+.category-container button {
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+.category-container input {
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 1px solid #333;
+    width: 40%;
+    height: 30px;
+}
+
+.category-container button {
+    margin-left: 10%;
+}
