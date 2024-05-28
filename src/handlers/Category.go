@@ -12,7 +12,7 @@ func HandleCategoryPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	username, err := getUsernameByEmail(email)
+	username, err := getUsernameEmail(email)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -37,7 +37,7 @@ func HandleCategoryPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getUsernameByEmail(email string) (string, error) {
+func getUsernameEmail(email string) (string, error) {
 	basededonnees, err := DatabasePath()
 	if err != nil {
 		return "", err
