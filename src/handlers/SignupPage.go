@@ -62,11 +62,11 @@ func HandleSignupPage(w http.ResponseWriter, r *http.Request) {
 		if err := insertUser(basededonnees, name, lastName, pseudo, email, password); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 
-			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			http.Redirect(w, r, "/Login", http.StatusSeeOther)
 			return
 		}
 
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		http.Redirect(w, r, "/Login", http.StatusSeeOther)
 		return
 	}
 
