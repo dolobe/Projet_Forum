@@ -40,7 +40,8 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
     padding: 10px 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -49,7 +50,21 @@ input[type="password"] {
     align-items: center;
     margin-top: 10px;
     width: 17.5%;
-    height: 35px;
+    height: 30px;
+    margin-left: 40%;
+    margin-bottom: 25px;
+}
+
+input {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 17.5%;
+    height: 30px;
     margin-left: 40%;
     margin-bottom: 25px;
 }
@@ -60,6 +75,7 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
+
     cursor: pointer;
     display: flex;
     justify-content: center;
