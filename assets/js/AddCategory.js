@@ -2,6 +2,11 @@ function addCategory() {
     const categoryName = document.getElementById("cat").value.trim();
     const subjectName  = document.getElementById("sub").value.trim();
 
+    if (categoryName === "" || subjectName === "") {
+        alert("il faut remplir les champs");
+        return;
+    }
+
     const newCategory = document.createElement("div");
     newCategory.classList.add("category-item");
 
@@ -24,8 +29,35 @@ function addCategory() {
         subjectList.appendChild(subject1);
     }
 
+    const newInputSubject = document.createElement("input");
+    newInputSubject.setAttribute("type", "text");
+    newInputSubject.classList.add("sub-btn");
+
+    const newButtonAdd = document.createElement("button");
+    newButtonAdd.type = "button";
+    newButtonAdd.textContent = "Ajouter";
+    newButtonAdd.classList.add("add-btn");
+
+    newButtonAdd.addEventListener("click", function() {
+        const subjectName = newInputSubject.value.trim();
+        if (subjectName === "") {
+            alert("il faut remplir les champs");
+            return;
+        }
+
+        const newSubject = document.createElement("li");
+        const newSubjectLink = document.createElement("a");
+        newSubjectLink.setAttribute("href", "#");
+        newSubjectLink.textContent = subjectName;
+        newSubject.appendChild(newSubjectLink);
+        subjectList.appendChild(newSubject);
+        newInputSubject.value = "";
+    });
+
 
     categoryContainer.appendChild(subjectList);
+    categoryContainer.appendChild(newInputSubject);
+    categoryContainer.appendChild(newButtonAdd);
     newCategory.appendChild(categoryTitle);
     newCategory.appendChild(categoryContainer);
 
