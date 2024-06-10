@@ -23,10 +23,6 @@
             <div id="categoryDropdown" style="display: none;">
                 <ul id="categoryList">
                     <li><a href="/Game">Game</a></li>
-                    <li><a href="/Health">Food</a></li>
-                    <li><a href="/Song">Song</a></li>
-                    <li><a href="/Movie">Movie</a></li>
-                    <li><a href="/Book">Book</a></li>
                 </ul>
             </div>
         </div>
@@ -34,13 +30,23 @@
             <div class="category-item">
                 <div class="category-title"><a href="/Add">Ajouter une catégorie</a></div>
                 <div class="category-container">
-                    <label for="text">Category title :
-                        <input type="cat" name="cat" id="cat"><br/><br/></label>
-                    <label for="text">Subject :
-                        <input type="sub" name="sub" id="sub"><br/><br/></label>
-                    <button id="addCategory">Ajouter</button><br/><br/>
+                    <label for="cat">Category title : </label>
+                    <input type="text" name="cat" id="cat"><br/><br/>
+                    <label for="sub">Subject : </label>
+                    <input type="text" name="sub" id="sub"><br/><br/>
+                    <button type="button" id="addCategory">Ajouter</button><br/><br/>
                 </div>
             </div>
+            {{range .Categories}}
+            <div class="category-item">
+                <div class="category-title"><a href="#">{{.CategoryName}}</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">{{.SubjectName}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            {{end}}
         </div>
     </div>
     <link rel="stylesheet" href="assets/css/Category.css">
