@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"database/sql"
-	"errors"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,7 +29,7 @@ func HandleCategoryPage(w http.ResponseWriter, r *http.Request) {
 		subjectName := r.FormValue("sub")
 
 		if categoryName == "" || subjectName == "" {
-			http.Error(w, "Category and subject name cannot be empty", http.StatusBadRequest)
+			http.Error(w, "Les champs 'cat' et 'sub' doivent être remplis", http.StatusBadRequest)
 			return
 		}
 
@@ -60,7 +60,7 @@ func HandleCategoryPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles("templates/category.html")
+	tmpl, err := template.ParseFiles("templates/Category.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -98,32 +98,32 @@ func getUsernameEmail(email string) (string, error) {
 	return username, nil
 }
 
-func insertCategory(basededonnees *sql.DB, categoryName, subjectName string) error {
-	var here bool
-	checkQuery := `SELECT EXISTS(SELECT 1 FROM Categories WHERE categoryName = ?)`
-	err := basededonnees.QueryRow(checkQuery, categoryName).Scan(&here)
+func insertCategory(basededonnees *sql.DB, categoryName string, subjectName string) error {
+	var exists bool
+	checkQuery := `SELECT EXISTS(SELECT 1 FROM Category WHERE categoryName = ?)`
+	err := basededonnees.QueryRow(checkQuery, categoryName).Scan(&exists)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Erreur lors de la vérification de la catégorie: %v\n", err)
 		return err
 	}
 
-	log.Println(here)
+	log.Printf("Vérification de l'existence de la catégorie '%s': %v\n", categoryName, exists)
 
-	if here {
-		return errors.New("Category already exists")
+	if exists {
+		return fmt.Errorf("la catégorie '%s' existe déjà", categoryName)
 	}
 
 	id := uuid.New().String()
-	insertCategoryQuery := `INSERT INTO Categories (id, categoryName, subjectName) VALUES (?, ?, ?)`
+	insertCategoryQuery := `INSERT INTO Category (id, categoryName, subjectName) VALUES (?, ?, ?)`
 	_, err = basededonnees.Exec(insertCategoryQuery, id, categoryName, subjectName)
 	if err != nil {
-		log.Println(err)
+		log.Printf("Erreur lors de l'insertion de la catégorie: %v\n", err)
 	}
 	return err
 }
 
 func fetchCategories(basededonnees *sql.DB) ([]Category, error) {
-	rows, err := basededonnees.Query(`SELECT id, categoryName, subjectName FROM Categories`)
+	rows, err := basededonnees.Query(`SELECT id, categoryName, subjectName FROM Category`)
 	if err != nil {
 		return nil, err
 	}
@@ -132,13 +132,10 @@ func fetchCategories(basededonnees *sql.DB) ([]Category, error) {
 	var categories []Category
 	for rows.Next() {
 		var category Category
-		err := rows.Scan(&category.ID, &category.CategoryName, &category.SubjectName)
-		if err != nil {
+		if err := rows.Scan(&category.ID, &category.CategoryName, &category.SubjectName); err != nil {
 			return nil, err
 		}
-
 		categories = append(categories, category)
 	}
-
 	return categories, nil
 }
