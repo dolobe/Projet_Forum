@@ -2,10 +2,30 @@ function addCategory() {
     const categoryName = document.getElementById("cat").value.trim();
     const subjectName  = document.getElementById("sub").value.trim();
 
-    if (categoryName === "" || subjectName === "") {
+    if (categoryName === "") {
         alert("il faut remplir les champs");
         return;
     }
+
+    const donnees = new URLSearchParams();
+    donnees.append("cat", categoryName);
+    donnees.append("sub", subjectName);
+
+    fetch("/category", {
+        method: "POST",
+        body: donnees
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Erreur HTTP : " + response.status);
+        }
+        return response.json();
+    }).then(donnees => {
+        console.log("Categoire ajoutée avec succès", donnees);
+        location.reload();
+    }).catch(error => {
+        console.error("Erreur :", error);
+        alert("Erreur lors de l'ajout de la catégorie");
+    });
 
     const newCategory = document.createElement("div");
     newCategory.classList.add("category-item");
