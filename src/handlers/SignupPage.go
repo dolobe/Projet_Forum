@@ -9,30 +9,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func DatabasePath() (*sql.DB, error) {
-	basededonnees, err := sql.Open("sqlite3", "./src/DataBase/forum.db")
-	if err != nil {
-		return nil, err
-	}
-	if err := createTableUsers(basededonnees); err != nil {
-		return nil, err
-	}
-	return basededonnees, nil
-}
-
-func createTableUsers(basededonnees *sql.DB) error {
-	createTableUsersQuery := `CREATE TABLE IF NOT EXISTS Users (
-		id TEXT PRIMARY KEY,
-		name TEXT UNIQUE,
-		last_name TEXT UNIQUE,
-		pseudo TEXT UNIQUE,
-		email TEXT UNIQUE,
-		password TEXT
-	)`
-	_, err := basededonnees.Exec(createTableUsersQuery)
-	return err
-}
-
 func HandleSignupPage(w http.ResponseWriter, r *http.Request) {
 	basededonnees, err := DatabasePath()
 	if err != nil {
