@@ -46,7 +46,7 @@ func HandleSignupPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	htmlfile, err := ioutil.ReadFile("templates/signupPage.html")
+	htmlfile, err := ioutil.ReadFile("templates/SignupPage.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
