@@ -75,7 +75,6 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -114,26 +113,19 @@ p{
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 17.5%;
+    height: 30px;
+    margin-left: 40%;
+    margin-bottom: 25px;
+    color: black;
 }
+
 
 .btn-connexion-reseau:hover {
     opacity: 0.8;
-}
-
-.btn-connexion-reseau[data-provider="google"] {
-    background-color: white;
-    color: black;
-    right: 10%;
-}
-
-.btn-connexion-reseau[data-provider="microsoft"] {
-    background-color: white;
-    color: black;
-}
-
-.btn-connexion-reseau[data-provider="apple"] {
-    background-color: white;
-    color: black;
 }
 
 footer {
