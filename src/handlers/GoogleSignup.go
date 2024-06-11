@@ -50,14 +50,14 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db, err := DatabasePath()
+	basededonnes, err := DatabasePath()
 	if err != nil {
 		http.Error(w, "Échec de la connexion à la base de données", http.StatusInternalServerError)
 		return
 	}
-	defer db.Close()
+	defer basededonnes.Close()
 
-	if err := saveUser(db, profile.GivenName, profile.FamilyName, profile.Email, profile.Name); err != nil {
+	if err := saveUser(basededonnes, profile.GivenName, profile.FamilyName, profile.Email, profile.Name); err != nil {
 		http.Error(w, "Échec de l'enregistrement des informations utilisateur", http.StatusInternalServerError)
 		return
 	}
@@ -80,14 +80,14 @@ func HandlePseudo(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 		pseudo := r.FormValue("pseudo")
 
-		db, err := DatabasePath()
+		basededonnes, err := DatabasePath()
 		if err != nil {
 			http.Error(w, "Échec de la connexion à la base de données", http.StatusInternalServerError)
 			return
 		}
-		defer db.Close()
+		defer basededonnes.Close()
 
-		_, err = db.Exec("UPDATE Users SET pseudo = ? WHERE email = ?", pseudo, email)
+		_, err = basededonnes.Exec("UPDATE Users SET pseudo = ? WHERE email = ?", pseudo, email)
 		if err != nil {
 			http.Error(w, "Échec de la mise à jour du pseudo", http.StatusInternalServerError)
 			return
