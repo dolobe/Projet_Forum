@@ -1,10 +1,12 @@
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
-	"fmt"
+	"html/template"
 	"net/http"
 
+	"github.com/google/uuid"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -38,13 +40,74 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	var profile struct {
-		Email string `json:"email"`
-		Name  string `json:"name"`
+		Email      string `json:"email"`
+		Name       string `json:"name"`
+		GivenName  string `json:"given_name"`
+		FamilyName string `json:"family_name"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&profile); err != nil {
 		http.Error(w, "Échec de la lecture des informations de profil", http.StatusInternalServerError)
 		return
 	}
 
-	fmt.Fprintf(w, "Email: %s, Name: %s", profile.Email, profile.Name)
+	db, err := DatabasePath()
+	if err != nil {
+		http.Error(w, "Échec de la connexion à la base de données", http.StatusInternalServerError)
+		return
+	}
+	defer db.Close()
+
+	if err := saveUser(db, profile.GivenName, profile.FamilyName, profile.Email, profile.Name); err != nil {
+		http.Error(w, "Échec de l'enregistrement des informations utilisateur", http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "/pseudo?email="+profile.Email+"&name="+profile.Name, http.StatusSeeOther)
+}
+
+func saveUser(db *sql.DB, lastName, firstName, email, name string) error {
+	insertUserQuery := `INSERT INTO Users (id, name, last_name, pseudo, email, password) VALUES (?, ?, ?, ?, ?, ?)`
+	_, err := db.Exec(insertUserQuery, generateUUID(), name, lastName, firstName, email, nil)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func HandlePseudo(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		r.ParseForm()
+		email := r.FormValue("email")
+		pseudo := r.FormValue("pseudo")
+
+		db, err := DatabasePath()
+		if err != nil {
+			http.Error(w, "Échec de la connexion à la base de données", http.StatusInternalServerError)
+			return
+		}
+		defer db.Close()
+
+		_, err = db.Exec("UPDATE Users SET pseudo = ? WHERE email = ?", pseudo, email)
+		if err != nil {
+			http.Error(w, "Échec de la mise à jour du pseudo", http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(w, r, "/Login", http.StatusSeeOther)
+		return
+	}
+
+	email := r.URL.Query().Get("email")
+
+	tmpl := template.Must(template.ParseFiles("templates/pseudo.html"))
+	err := tmpl.Execute(w, map[string]string{
+		"Email": email,
+	})
+	if err != nil {
+		http.Error(w, "Échec du rendu de la page", http.StatusInternalServerError)
+	}
+}
+
+func generateUUID() string {
+	return uuid.New().String()
 }
