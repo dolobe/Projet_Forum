@@ -1,0 +1,143 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+header {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p{
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+main {
+    padding: 20px;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 40%;
+
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 17.5%;
+    height: 35px;
+    margin-left: 40%;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #10a37f;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 20%;
+    height: 50px;
+    margin-left: 40%;
+}
+
+button:hover {
+    background-color: #0c896d;
+}
+
+a {
+    color:  #10a37f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p{
+    margin-top: 5px;
+}
+
+.options-connexion {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-connexion-reseau {
+    display: flex;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-connexion-reseau:hover {
+    opacity: 0.8;
+}
+
+.btn-connexion-reseau[data-provider="google"] {
+    background-color: white;
+    color: black;
+    right: 10%;
+}
+
+.btn-connexion-reseau[data-provider="microsoft"] {
+    background-color: white;
+    color: black;
+}
+
+.btn-connexion-reseau[data-provider="apple"] {
+    background-color: white;
+    color: black;
+}
+
+footer {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+img {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    margin-right: 25%;
+}
+
+img[data-provider="google"] {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    right: 10%;
+}
+

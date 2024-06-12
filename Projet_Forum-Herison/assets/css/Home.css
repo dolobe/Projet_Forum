@@ -1,0 +1,19 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    height: 300vh;
+}
+
+.image1 img {
+    width: 100%;
+    height: 150vw;
+    display: block;
+    margin: 0 auto;
+}
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/navBar.css">
+    <title>Projet Forum</title>
+</head>
+<body>
+    <div class="body">
+        <div class="navbar">
+            <div class="logo">FORUM</div>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button class="search-btn" alt="Rechercher"></button>
+            </div>
+            <div class="links">
+                <a href="/">About & Home</a>
+                <a href="/category" id="categoryLink" >Category</a>
+                <a href="#">{{.Username}}</a>
+            </div>
+            
+            <div id="categoryDropdown" style="display: none;">
+                <ul id="categoryList">
+                    <li><a href="/Game">Game</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="category-item">
+                <div class="category-title"><a href="/Add">Ajouter une catégorie</a></div>
+                <div class="category-container">
+                    <label for="cat">Category title : </label>
+                    <input type="text" name="cat" id="cat"><br/><br/>
+                    <label for="sub">Subject : </label>
+                    <input type="text" name="sub" id="sub"><br/><br/>
+                    <button type="button" id="addCategory">Ajouter</button><br/><br/>
+                </div>
+            </div>
+            {{range .Categories}}
+            <div class="category-item">
+                <div class="category-title"><a href="#">{{.CategoryName}}</a></div>
+                <div class="category-container">
+                    <ul id="Subject-container">
+                        <li><a href="#">{{.SubjectName}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            {{end}}
+        </div>
+    </div>
+    <link rel="stylesheet" href="assets/css/Category.css">
+    <script src="assets/js/HomeCategory.js"></script>
+    <script src="assets/js/AddCategory.js"></script>
+</body>
+</html>

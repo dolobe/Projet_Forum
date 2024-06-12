@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/pseudo.css">
+</head>
+    <title>Log In</title>
+</head>
+<body>
+    <div class="all">
+        <header>
+            <h1>Bienvenue</h1>
+        </header>
+            <div class="container">
+                <form action="/pseudo" method="post">
+                    <input type="hidden" name="email" value="{{.Email}}">
+                    <input type="hidden" name="name" value="{{.Name}}">
+                    <label for="pseudo">Pseudo</label>
+                    <input type="pseudo" id="pseudo" name="pseudo" required>
+    
+                    <button type="submit">Continuer</button>
+                </form>
+            </div>
+    </div>
+    
+        
+</body>
+</html>
