@@ -33,27 +33,23 @@
                 <a href="#">{{.Username}}</a>
             </div>
             <div class="contenant">
-                <label for="text">{{.SubjectName}}</label> <!-- Affiche le sujet -->
+                <label for="text">{{.SubjectName}}</label>
             </div>
             <div class="Interaction">
                 <a href="#">Like </a>
                 <a href="#">Dislike</a>
-                <a href="#" onclick="showCommentInput(event)">Comment</a> <!-- Appelle la fonction JavaScript pour commenter -->
+                <a href="#" onclick="showCommentInput(event)">Comment</a>
                 <a href="#">Share</a>
             </div>
             <div class="comments">
-                {{range .Comments}} <!-- Boucle sur les commentaires -->
                 <div class="comment">
-                    <div class="comment-username">{{.Username}}</div> <!-- Affiche l'username du commentaire -->
+                    <div class="comment-username"></div>
                     <div class="replies">
-                        {{range .Replies}} <!-- Boucle sur les réponses -->
                         <div class="reply">
-                            <div class="reply-username">{{.Username}}</div> <!-- Affiche l'username de la réponse -->
+                            <div class="reply-username"></div>
                         </div>
-                        {{end}}
                     </div>
                 </div>
-                {{end}}
             </div>
         </div>
     </div>
