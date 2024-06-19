@@ -13,7 +13,10 @@ func main() {
 	http.HandleFunc("/Login", handlers.HandleLoginPage)
 	http.HandleFunc("/signup", handlers.HandleSignupPage)
 	http.HandleFunc("/category", handlers.HandleCategoryPage)
+	http.HandleFunc("/allCategory", handlers.HandleAllCategoryPage)
+	http.HandleFunc("/post", handlers.HandlePostPage)
 	http.HandleFunc("/googleSignup", handlers.HandleGoogleSignup)
+	http.HandleFunc("/googleLogin", handlers.HandleGoogleLogin)
 	http.HandleFunc("/google/callback", handlers.HandleGoogleCallback)
 	http.HandleFunc("/pseudo", handlers.HandlePseudo)
 
