@@ -16,6 +16,7 @@ type Category struct {
 	SubjectName  string
 }
 
+// HandleCategoryPage gère les requêtes vers la page des catégories
 func HandleCategoryPage(w http.ResponseWriter, r *http.Request) {
 	basededonnees, err := DatabasePath()
 	if err != nil {
@@ -81,6 +82,7 @@ func HandleCategoryPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// getUsernameEmail renvoie le pseudo de l'utilisateur à partir de son email
 func getUsernameEmail(email string) (string, error) {
 	basededonnees, err := DatabasePath()
 	if err != nil {
@@ -98,6 +100,7 @@ func getUsernameEmail(email string) (string, error) {
 	return username, nil
 }
 
+// insertCategory insère une nouvelle catégorie dans la base de données
 func insertCategory(basededonnees *sql.DB, categoryName string, subjectName string) error {
 	var exists bool
 	checkQuery := `SELECT EXISTS(SELECT 1 FROM Category WHERE categoryName = ?)`
@@ -122,6 +125,7 @@ func insertCategory(basededonnees *sql.DB, categoryName string, subjectName stri
 	return err
 }
 
+// fetchCategories récupère toutes les catégories de la base de données
 func fetchCategories(basededonnees *sql.DB) ([]Category, error) {
 	rows, err := basededonnees.Query(`SELECT id, categoryName, subjectName FROM Category`)
 	if err != nil {

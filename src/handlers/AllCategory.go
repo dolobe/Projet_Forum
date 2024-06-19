@@ -13,14 +13,22 @@ func HandleAllCategoryPage(w http.ResponseWriter, r *http.Request) {
 	}
 	defer basededonnees.Close()
 
-	categories, err := getCategories(basededonnees)
+	email, err := GetSessionEmail(r)
+	if err != nil {
+		http.Redirect(w, r, "/Login", http.StatusSeeOther)
+		return
+	}
+
+	username, err := getUsernameEmail(email)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	data := PageData{
-		Categories: categories,
+	categories, err := fetchCategories(basededonnees)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	tmpl, err := template.ParseFiles("templates/AllCategory.html")
@@ -29,7 +37,15 @@ func HandleAllCategoryPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = tmpl.Execute(w, data)
+	donnees := struct {
+		Username   string
+		Categories []Category
+	}{
+		Username:   username,
+		Categories: categories,
+	}
+
+	err = tmpl.Execute(w, donnees)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

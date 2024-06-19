@@ -1,12 +1,9 @@
 package handlers
 
 import (
-	"database/sql"
 	"encoding/json"
 	"html/template"
 	"net/http"
-
-	"github.com/google/uuid"
 )
 
 func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
@@ -43,42 +40,7 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	}
 	defer basededonnes.Close()
 
-	exists, err := userExists(basededonnes, profile.Email)
-	if err != nil {
-		http.Error(w, "Échec de la vérification de l'utilisateur", http.StatusInternalServerError)
-		return
-	}
-
-	if exists {
-		http.Redirect(w, r, "/category", http.StatusSeeOther)
-		return
-	}
-
-	if err := saveUser(basededonnes, profile.FamilyName, profile.GivenName, profile.Email, profile.Name); err != nil {
-		http.Error(w, "Échec de l'enregistrement de l'utilisateur", http.StatusInternalServerError)
-		return
-	}
-
 	http.Redirect(w, r, "/pseudo?email="+profile.Email+"&name="+profile.Name, http.StatusSeeOther)
-}
-
-func userExists(db *sql.DB, email string) (bool, error) {
-	var exists bool
-	row := db.QueryRow("SELECT EXISTS(SELECT 1 FROM Users WHERE email = ?)", email)
-	err := row.Scan(&exists)
-	if err != nil && err != sql.ErrNoRows {
-		return false, err
-	}
-	return exists, nil
-}
-
-func saveUser(db *sql.DB, lastName, firstName, email, name string) error {
-	insertUserQuery := `INSERT INTO Users (id, name, last_name, pseudo, email, password) VALUES (?, ?, ?, ?, ?, ?)`
-	_, err := db.Exec(insertUserQuery, generateUUID(), name, lastName, firstName, email, nil)
-	if err != nil {
-		return err
-	}
-	return nil
 }
 
 func HandlePseudo(w http.ResponseWriter, r *http.Request) {
@@ -100,7 +62,7 @@ func HandlePseudo(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		http.Redirect(w, r, "/category", http.StatusSeeOther)
+		http.Redirect(w, r, "/allCategory", http.StatusSeeOther)
 		return
 	}
 
@@ -113,8 +75,4 @@ func HandlePseudo(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Échec du rendu de la page", http.StatusInternalServerError)
 	}
-}
-
-func generateUUID() string {
-	return uuid.New().String()
 }

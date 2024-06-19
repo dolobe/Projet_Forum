@@ -42,7 +42,7 @@ func HandleSignupPage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		http.Redirect(w, r, "/Login", http.StatusSeeOther)
+		http.Redirect(w, r, "/allCategory", http.StatusSeeOther)
 		return
 	}
 
