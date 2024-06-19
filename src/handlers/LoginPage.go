@@ -33,7 +33,7 @@ func HandleLoginPage(w http.ResponseWriter, r *http.Request) {
 
 		if TruePassword {
 			SetSessionCookies(w, email)
-			http.Redirect(w, r, "/category", http.StatusSeeOther)
+			http.Redirect(w, r, "/allCategory", http.StatusSeeOther)
 			return
 		}
 
