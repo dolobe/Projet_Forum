@@ -1,0 +1,56 @@
+.PostPrivate {
+    border: 2px solid #000;
+    margin-top: 20px;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.usernamePrivate {
+    color: #000;
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.usernamePrivate a {
+    color: #000;
+    margin-left: 5%;
+}
+
+.contenant {
+    margin-top: 50px;
+    font-size: 2.5em;
+    margin-left: 5%;
+}
+
+.Interaction {
+    margin-top: 80px;
+    margin-left: 5%;
+    margin-bottom: 20px;
+}
+
+.Interaction a {
+    margin-right: 18%;
+    font-size: 1.5em;
+}
+
+.comment-input {
+    margin-top: 10px;
+}
+
+.comment-input input {
+    margin-left: 5%;
+    width: 50%;
+    border: 1px solid #ccc;
+}
+
+.comment-input button {
+    height: inherit; /* Hériter de la hauteur de l'input */
+}
+
+.comment {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
