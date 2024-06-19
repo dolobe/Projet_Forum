@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="assets/css/navBar.css">
+    <link rel="stylesheet" href="assets/css/Category.css">
+    <link rel="stylesheet" href="assets/css/post.css">
+</head>
+<body>
+    <div class="body">
+        <div class="navbar">
+            <div class="logo">FORUM</div>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button class="search-btn" alt="Rechercher"></button>
+            </div>
+            <div class="links">
+                <a href="/">About & Home</a>
+                <a href="/category" id="categoryLink">Category</a>
+                <a href="#">{{.Username}}</a> <!-- Affiche l'username -->
+            </div>
+            
+            <div id="categoryDropdown" style="display: none;">
+                <ul id="categoryList">
+                    <li><a href="/Game">Game</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="PostPrivate">
+            <div class="usernamePrivate">
+                <a href="#">{{.Username}}</a> <!-- Affiche l'username -->
+            </div>
+            <div class="contenant">
+                <label for="text">{{.SubjectName}}</label> <!-- Affiche le sujet -->
+            </div>
+            <div class="Interaction">
+                <a href="#">Like </a>
+                <a href="#">Dislike</a>
+                <a href="#" onclick="showCommentInput(event)">Comment</a> <!-- Appelle la fonction JavaScript pour commenter -->
+                <a href="#">Share</a>
+            </div>
+            <div class="comments">
+                {{range .Comments}} <!-- Boucle sur les commentaires -->
+                <div class="comment">
+                    <div class="comment-username">{{.Username}}</div> <!-- Affiche l'username du commentaire -->
+                    <div class="replies">
+                        {{range .Replies}} <!-- Boucle sur les réponses -->
+                        <div class="reply">
+                            <div class="reply-username">{{.Username}}</div> <!-- Affiche l'username de la réponse -->
+                        </div>
+                        {{end}}
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/HomeCategory.js"></script>
+    <script src="assets/js/Comment.js"></script>
+</body>
+</html>
