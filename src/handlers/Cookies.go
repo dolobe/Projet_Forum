@@ -22,3 +22,15 @@ func GetSessionEmail(r *http.Request) (string, error) {
 	}
 	return cookie.Value, nil
 }
+
+func GetUserFromSession(r *http.Request) (string, string, error) {
+	emailCookie, err := r.Cookie("email")
+	if err != nil {
+		return "", "", err
+	}
+	usernameCookie, err := r.Cookie("username")
+	if err != nil {
+		return "", "", err
+	}
+	return emailCookie.Value, usernameCookie.Value, nil
+}
