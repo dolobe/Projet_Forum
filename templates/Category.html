@@ -16,19 +16,13 @@
             </div>
             <div class="links">
                 <a href="/">About & Home</a>
-                <a href="/category" id="categoryLink" >Category</a>
+                <a href="/category" id="categoryLink">Category</a>
                 <a href="#">{{.Username}}</a>
-            </div>
-            
-            <div id="categoryDropdown" style="display: none;">
-                <ul id="categoryList">
-                    <li><a href="/Game">Game</a></li>
-                </ul>
             </div>
         </div>
         <div class="container">
             <div class="category-item">
-                <div class="category-title"><a href="/Add">Ajouter une catégorie</a></div>
+                <div class="category-title"><a href="#">Ajouter une catégorie</a></div>
                 <div class="category-container">
                     <label for="cat">Category title : </label>
                     <input type="text" name="cat" id="cat"><br/><br/>
@@ -41,7 +35,7 @@
             <div class="category-item">
                 <div class="category-title"><a href="#">{{.CategoryName}}</a></div>
                 <div class="category-container">
-                    <ul id="Subject-container">
+                    <ul class="subject-container">
                         <li><a href="#">{{.SubjectName}}</a></li>
                     </ul>
                 </div>
