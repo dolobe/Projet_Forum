@@ -6,6 +6,10 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+type PageData struct {
+	Categories []Category
+}
+
 func DatabasePath() (*sql.DB, error) {
 	basededonnees, err := sql.Open("sqlite3", "./src/DataBase/forum.db")
 	if err != nil {
@@ -41,4 +45,27 @@ func createTableUsers(basededonnees *sql.DB) error {
 		return err
 	}
 	return nil
+}
+
+func getCategories(basededonnees *sql.DB) ([]Category, error) {
+	rows, err := basededonnees.Query(`SELECT CategoryName, SubjectName FROM Category`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var categories []Category
+	for rows.Next() {
+		var category Category
+		if err := rows.Scan(&category.CategoryName, &category.SubjectName); err != nil {
+			return nil, err
+		}
+		categories = append(categories, category)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return categories, nil
 }
