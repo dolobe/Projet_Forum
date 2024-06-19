@@ -43,25 +43,23 @@ func HandlePostPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	// Ici, vous pouvez choisir un SubjectName spécifique en fonction de votre logique.
-	// Par exemple, sélectionner le premier sujet de la liste ou tout autre critère de sélection.
 
-	// Pour cet exemple, nous allons utiliser le premier sujet de la liste récupérée.
+	// Take the first subject name
 	var subjectName string
 	if len(subjects) > 0 {
-		subjectName = subjects[0].SubjectName // Utilisation du SubjectName du premier sujet comme exemple
+		subjectName = subjects[0].SubjectName
 	} else {
-		subjectName = "Aucun sujet trouvé" // Message par défaut si aucun sujet n'est récupéré
+		subjectName = "Aucun sujet trouvé"
 	}
 
 	data := struct {
 		Categories  []Category
 		Username    string
-		SubjectName string // Ajout du SubjectName dans la structure de données
+		SubjectName string
 	}{
 		Categories:  categories,
 		Username:    username,
-		SubjectName: subjectName, // Assignation du SubjectName récupéré
+		SubjectName: subjectName,
 	}
 
 	tmpl, err := template.ParseFiles("templates/post.html")
