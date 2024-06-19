@@ -1,77 +1,228 @@
-// Fonction pour afficher la zone de commentaire au clic sur "Comment"
+// // Show comment input
+// function showCommentInput(event) {
+//     event.preventDefault();
+
+//     var username = getUsername();
+
+//     var commentInputDiv = getOrCreateCommentInput();
+
+//     // Inserting the comment input after the comments
+//     var postPrivate = event.target.closest('.PostPrivate');
+//     var commentsDiv = postPrivate.querySelector('.comments');
+//     postPrivate.insertBefore(commentInputDiv, commentsDiv.nextSibling);
+// }
+
+// // Function to show reply input
+// function showReplyInput(event, username) {
+//     event.preventDefault();
+
+//     var commentInputDiv = getOrCreateCommentInput(); 
+
+//     // Update the input for the replys
+//     var input = commentInputDiv.querySelector('input');
+//     input.dataset.replyingTo = 'true';
+//     input.placeholder = 'Votre réponse...';
+
+//     // Update the button for the reply
+//     var button = commentInputDiv.querySelector('button');
+//     button.textContent = 'Envoyer la réponse';
+
+//     // Insert the comment input after the comment
+//     var commentElement = event.target.closest('.comment');
+//     var repliesDiv = commentElement.querySelector('.replies');
+//     if (!repliesDiv) {
+//         repliesDiv = document.createElement('div');
+//         repliesDiv.classList.add('replies');
+//         commentElement.appendChild(repliesDiv);
+//     }
+
+//     repliesDiv.appendChild(commentInputDiv);
+// }
+
+// // Function to get the username
+// function getUsername() {
+//     return document.querySelector('.links a:last-child').textContent.trim();
+// }
+
+// // Function to get or create the comment input
+// function getOrCreateCommentInput() {
+//     var commentInputDiv = document.querySelector('.comment-input');
+//     if (!commentInputDiv) {
+//         commentInputDiv = createCommentInput();
+//     }
+//     return commentInputDiv;
+// }
+
+// // Function to create the comment input
+// function createCommentInput() {
+//     var commentInputDiv = document.createElement('div');
+//     commentInputDiv.classList.add('comment-input');
+
+//     var input = document.createElement('input');
+//     input.type = 'text';
+//     input.placeholder = 'Votre commentaire...';
+//     input.style.marginLeft = '25%';
+//     input.style.width = '50%';
+//     input.style.border = '1px solid #ccc';
+//     input.style.marginBottom = '20px';
+
+//     var button = document.createElement('button');
+//     button.textContent = 'Envoyer';
+//     button.onclick = function() {
+//         var input = commentInputDiv.querySelector('input');
+//         var username = getUsername();
+//         if (input.dataset.replyingTo) {
+//             submitReply(input, username);
+//         } else {
+//             submitComment(input, username);
+//         }
+//     };
+
+//     commentInputDiv.appendChild(input);
+//     commentInputDiv.appendChild(button);
+
+//     return commentInputDiv;
+// }
+
+// // Function to render the comments
+// function createCommentElement(username, commentText) {
+//     var commentElement = document.createElement('div');
+//     commentElement.classList.add('comment');
+//     commentElement.style.width = '40%';
+//     commentElement.style.marginBottom = '20px';
+//     commentElement.style.marginLeft = '30%';
+//     commentElement.textContent = username + ': ' + commentText;
+
+//     var replyLink = document.createElement('a');
+//     replyLink.href = '#';
+//     replyLink.textContent = 'Répondre';
+//     replyLink.onclick = function(event) {
+//         event.preventDefault();
+//         showReplyInput(event, username);
+//     };
+
+//     commentElement.appendChild(document.createElement('br'));
+//     commentElement.appendChild(replyLink);
+
+//     var repliesDiv = document.createElement('div');
+//     repliesDiv.classList.add('replies');
+//     commentElement.appendChild(repliesDiv);
+
+//     return commentElement;
+// }
+
+// // Function to create a reply element
+// function createReplyElement(username, replyText) {
+//     var replyElement = document.createElement('div');
+//     replyElement.classList.add('reply');
+//     replyElement.style.marginLeft = '35%';
+//     replyElement.style.width = '35%';
+//     replyElement.textContent = username + ': ' + replyText;
+
+//     return replyElement;
+// }
+
+// // Function to render the comments
+// function submitComment(input, username) {
+//     var commentText = input.value.trim();
+
+//     if (commentText !== '') {
+//         var commentList = input.closest('.PostPrivate').querySelector('.comments');
+//         var commentElement = createCommentElement(username, commentText);
+//         commentList.appendChild(commentElement);
+//         insertCommentInDatabase(username, commentText);
+//         input.value = '';
+//     }
+// }
+
+// // Function to submit a reply
+// function submitReply(input, username) {
+//     var replyText = input.value.trim();
+
+//     if (replyText !== '') {
+//         var commentElement = input.closest('.comment');
+//         var commentID = commentElement.dataset.commentId;
+//         var replyElement = createReplyElement(username, replyText);
+//         var replyList = commentElement.querySelector('.replies');
+//         replyList.appendChild(replyElement);
+//         insertReplyInDatabase(commentID, username, replyText);
+//         input.value = '';
+//         delete input.dataset.replyingTo;
+//         input.placeholder = 'Votre commentaire...';
+//         var button = input.nextSibling;
+//         button.textContent = 'Envoyer';
+//         var postPrivate = commentElement.closest('.PostPrivate');
+//         var commentsDiv = postPrivate.querySelector('.comments');
+//         postPrivate.insertBefore(document.querySelector('.comment-input'), commentsDiv.nextSibling);
+//     }
+// }
+
+// // Call the function to render the comments
+// window.addEventListener('load', function() {
+//     renderComments();
+// });
+
+// function renderComments() {
+//     // Get the comments from the database
+//     fetch('/getComments')
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(comments => {
+//         var postPrivates = document.querySelectorAll('.PostPrivate');
+//         postPrivates.forEach(postPrivate => {
+//             var commentsDiv = postPrivate.querySelector('.comments');
+//             commentsDiv.innerHTML = '';
+//             comments.forEach(comment => {
+//                 if (comment.postID === postPrivate.dataset.postId) {
+//                     var commentElement = createCommentElement(comment.username, comment.commentText);
+//                     commentElement.dataset.commentId = comment._id;
+//                     commentsDiv.appendChild(commentElement);
+//                     comment.replies.forEach(reply => {
+//                         var replyElement = createReplyElement(reply.username, reply.replyText);
+//                         commentElement.querySelector('.replies').appendChild(replyElement);
+//                     });
+//                 }
+//             });
+//         });
+//     })
+//     .catch(error => {
+//         console.error('Error getting comments:', error);
+//     });
+// }
+
+// Function to show comment input
 function showCommentInput(event) {
     event.preventDefault();
 
-    // Récupérer l'username depuis l'élément correspondant
-    var username = document.querySelector('.links a:last-child').textContent.trim();
+    var username = getUsername();
+    var commentInputDiv = getOrCreateCommentInput();
 
-    // Créer la zone de commentaire (si elle n'existe pas)
-    var commentInputDiv = document.querySelector('.comment-input');
-    if (!commentInputDiv) {
-        commentInputDiv = document.createElement('div');
-        commentInputDiv.classList.add('comment-input');
-
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.placeholder = 'Votre commentaire...';
-        input.style.marginLeft = '25%';
-        input.style.width = '50%';
-        input.style.border = '1px solid #ccc';
-        input.style.marginBottom = '20px';
-
-        var button = document.createElement('button');
-        button.textContent = 'Envoyer';
-        button.onclick = function() {
-            if (input.dataset.replyingTo) {
-                submitReply(input, username);
-            } else {
-                submitComment(input, username);
-            }
-        };
-
-        commentInputDiv.appendChild(input);
-        commentInputDiv.appendChild(button);
-    }
-
-    // Insérer la zone de commentaire avant les commentaires
+    // Inserting the comment input after the comments
     var postPrivate = event.target.closest('.PostPrivate');
     var commentsDiv = postPrivate.querySelector('.comments');
-    postPrivate.insertBefore(commentInputDiv, commentsDiv.nextSibling);
+    commentsDiv.appendChild(commentInputDiv);
 }
 
-// Fonction pour soumettre un commentaire
-function submitComment(input, username) {
-    var commentText = input.value.trim();
-
-    if (commentText !== '') {
-        var commentList = input.closest('.PostPrivate').querySelector('.comments');
-
-        // Créer un élément de commentaire avec l'username
-        var commentElement = createCommentElement(username, commentText);
-
-        // Ajouter le commentaire à la liste des commentaires
-        commentList.appendChild(commentElement);
-
-        // Réinitialiser le champ de commentaire
-        input.value = '';
-    }
-}
-
-// Fonction pour afficher la zone de réponse au clic sur "Répondre"
+// Function to show reply input
 function showReplyInput(event, username) {
     event.preventDefault();
 
-    // Marquer l'input actuel comme étant une réponse
-    var commentInputDiv = document.querySelector('.comment-input');
+    var commentInputDiv = getOrCreateCommentInput();
+
+    // Update the input for the reply
     var input = commentInputDiv.querySelector('input');
     input.dataset.replyingTo = 'true';
     input.placeholder = 'Votre réponse...';
 
-    // Mettre à jour le bouton pour correspondre au contexte de réponse
+    // Update the button for the reply
     var button = commentInputDiv.querySelector('button');
     button.textContent = 'Envoyer la réponse';
 
-    // Insérer la zone de réponse après le commentaire auquel on répond
+    // Insert the comment input after the comment
     var commentElement = event.target.closest('.comment');
     var repliesDiv = commentElement.querySelector('.replies');
     if (!repliesDiv) {
@@ -80,64 +231,80 @@ function showReplyInput(event, username) {
         commentElement.appendChild(repliesDiv);
     }
 
-    repliesDiv.appendChild(commentInputDiv); // Déplacer l'input et le bouton à l'endroit approprié
+    repliesDiv.appendChild(commentInputDiv);
 }
 
-// Fonction pour soumettre une réponse à un commentaire
-function submitReply(input, username) {
-    var replyText = input.value.trim();
+// Function to get the username
+function getUsername() {
+    return document.querySelector('.links a:last-child').textContent.trim();
+}
 
-    if (replyText !== '') {
-        var commentElement = input.closest('.comment');
-        var replyList = commentElement.querySelector('.replies');
-
-        // Créer un élément de réponse avec l'username
-        var replyElement = createReplyElement(username, replyText);
-
-        // Ajouter la réponse à la liste des réponses
-        replyList.appendChild(replyElement);
-
-        // Réinitialiser le champ de réponse
-        input.value = '';
-
-        // Réinitialiser l'état de réponse de l'input
-        delete input.dataset.replyingTo;
-        input.placeholder = 'Votre commentaire...';
-
-        // Mettre à jour le bouton après l'envoi de la réponse
-        var button = input.nextSibling;
-        button.textContent = 'Envoyer';
-
-        // Remettre la zone de commentaire à son emplacement initial
-        var postPrivate = commentElement.closest('.PostPrivate');
-        var commentsDiv = postPrivate.querySelector('.comments');
-        postPrivate.insertBefore(document.querySelector('.comment-input'), commentsDiv.nextSibling);
+// Function to get or create the comment input
+function getOrCreateCommentInput() {
+    var commentInputDiv = document.querySelector('.comment-input');
+    if (!commentInputDiv) {
+        commentInputDiv = createCommentInput();
     }
+    return commentInputDiv;
 }
 
-// Fonction utilitaire pour créer un élément de commentaire
+// Function to create the comment input
+function createCommentInput() {
+    var commentInputDiv = document.createElement('div');
+    commentInputDiv.classList.add('comment-input');
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Votre commentaire...';
+    input.style.marginLeft = '25%';
+    input.style.width = '50%';
+    input.style.border = '1px solid #ccc';
+    input.style.marginBottom = '20px';
+
+    var button = document.createElement('button');
+    button.textContent = 'Envoyer';
+    button.onclick = function() {
+        var input = commentInputDiv.querySelector('input');
+        var username = getUsername();
+        if (input.dataset.replyingTo) {
+            submitReply(input, username);
+        } else {
+            submitComment(input, username);
+        }
+    };
+
+    commentInputDiv.appendChild(input);
+    commentInputDiv.appendChild(button);
+
+    return commentInputDiv;
+}
+
+// Function to render a comment element
 function createCommentElement(username, commentText) {
     var commentElement = document.createElement('div');
     commentElement.classList.add('comment');
     commentElement.style.width = '40%';
     commentElement.style.marginBottom = '20px';
     commentElement.style.marginLeft = '30%';
-    commentElement.textContent = username + ': ' + commentText;
 
-    // Créer un lien "Répondre"
+    var commentUsername = document.createElement('div');
+    commentUsername.classList.add('comment-username');
+    commentUsername.textContent = username;
+    commentElement.appendChild(commentUsername);
+
+    var commentTextElement = document.createElement('div');
+    commentTextElement.textContent = commentText;
+    commentElement.appendChild(commentTextElement);
+
     var replyLink = document.createElement('a');
     replyLink.href = '#';
     replyLink.textContent = 'Répondre';
     replyLink.onclick = function(event) {
-        event.preventDefault();
-        showReplyInput(event, username); // Appeler la fonction pour ajouter une réponse avec l'username
+        showReplyInput(event, username);
     };
-
-    // Ajouter le lien "Répondre" en bas du commentaire
-    commentElement.appendChild(document.createElement('br')); // Ajouter un saut de ligne
+    commentElement.appendChild(document.createElement('br'));
     commentElement.appendChild(replyLink);
 
-    // Créer un div pour les réponses
     var repliesDiv = document.createElement('div');
     repliesDiv.classList.add('replies');
     commentElement.appendChild(repliesDiv);
@@ -145,13 +312,63 @@ function createCommentElement(username, commentText) {
     return commentElement;
 }
 
-// Fonction utilitaire pour créer un élément de réponse
+// Function to create a reply element
 function createReplyElement(username, replyText) {
     var replyElement = document.createElement('div');
     replyElement.classList.add('reply');
     replyElement.style.marginLeft = '35%';
     replyElement.style.width = '35%';
-    replyElement.textContent = username + ': ' + replyText;
+
+    var replyUsername = document.createElement('div');
+    replyUsername.classList.add('reply-username');
+    replyUsername.textContent = username;
+    replyElement.appendChild(replyUsername);
+
+    var replyTextElement = document.createElement('div');
+    replyTextElement.textContent = replyText;
+    replyElement.appendChild(replyTextElement);
 
     return replyElement;
 }
+
+// Function to submit a comment to the server
+function submitComment(input, username) {
+    var commentText = input.value.trim();
+
+    if (commentText !== '') {
+        var commentList = input.closest('.PostPrivate').querySelector('.comments');
+        var commentElement = createCommentElement(username, commentText);
+        commentList.appendChild(commentElement);
+        insertCommentInDatabase(username, commentText); // Call API to insert into database
+        input.value = '';
+    }
+}
+
+// Function to submit a reply to the server
+function submitReply(input, username) {
+    var replyText = input.value.trim();
+
+    if (replyText !== '') {
+        var commentElement = input.closest('.comment');
+        var replyElement = createReplyElement(username, replyText);
+        var repliesDiv = commentElement.querySelector('.replies');
+        repliesDiv.appendChild(replyElement);
+        insertReplyInDatabase(commentElement.dataset.commentId, username, replyText); // Call API to insert into database
+        input.value = '';
+        delete input.dataset.replyingTo;
+        input.placeholder = 'Votre commentaire...';
+        var button = input.nextSibling;
+        button.textContent = 'Envoyer';
+        var postPrivate = commentElement.closest('.PostPrivate');
+        var commentsDiv = postPrivate.querySelector('.comments');
+        postPrivate.insertBefore(document.querySelector('.comment-input'), commentsDiv.nextSibling);
+    }
+}
+
+
+
+// Call renderComments() when the page is loaded
+window.addEventListener('load', function() {
+    renderComments();
+});
+
