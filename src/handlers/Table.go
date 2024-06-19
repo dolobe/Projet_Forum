@@ -18,6 +18,20 @@ type User struct {
 	Password string
 }
 
+type Comment struct {
+	ID          int
+	Username    string
+	CommentText string
+	Replies     []Reply
+}
+
+type Reply struct {
+	ID        int
+	CommentID int
+	Username  string
+	ReplyText string
+}
+
 // Category is a struct that represents a category in the database
 func DatabasePath() (*sql.DB, error) {
 	basededonnees, err := sql.Open("sqlite3", "./src/DataBase/forum.db")
@@ -33,20 +47,33 @@ func DatabasePath() (*sql.DB, error) {
 // CreateTables User
 func createTables(db *sql.DB) error {
 	createTableUsersQuery := `CREATE TABLE IF NOT EXISTS Users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT UNIQUE,
-        last_name TEXT UNIQUE,
-        pseudo TEXT UNIQUE,
-        email TEXT UNIQUE,
-        password TEXT
-    )`
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name TEXT UNIQUE,
+		last_name TEXT UNIQUE,
+		pseudo TEXT UNIQUE,
+		email TEXT UNIQUE,
+		password TEXT
+	)`
 
-	// CreateTable Category
 	createTableCategoryQuery := `CREATE TABLE IF NOT EXISTS Category (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        CategoryName TEXT UNIQUE,
-        SubjectName TEXT
-    )`
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		CategoryName TEXT UNIQUE,
+		SubjectName TEXT
+	)`
+
+	createTableCommentsQuery := `CREATE TABLE IF NOT EXISTS Comments (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		username TEXT,
+		comment_text TEXT
+	)`
+
+	createTableRepliesQuery := `CREATE TABLE IF NOT EXISTS Replies (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		comment_id INTEGER,
+		username TEXT,
+		reply_text TEXT,
+		FOREIGN KEY (comment_id) REFERENCES Comments(id)
+	)`
 
 	_, err := db.Exec(createTableUsersQuery)
 	if err != nil {
@@ -54,6 +81,16 @@ func createTables(db *sql.DB) error {
 	}
 
 	_, err = db.Exec(createTableCategoryQuery)
+	if err != nil {
+		return err
+	}
+
+	_, err = db.Exec(createTableCommentsQuery)
+	if err != nil {
+		return err
+	}
+
+	_, err = db.Exec(createTableRepliesQuery)
 	if err != nil {
 		return err
 	}
