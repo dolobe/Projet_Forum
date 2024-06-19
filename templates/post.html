@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}}</title>
+    <title>Post</title>
     <link rel="stylesheet" href="assets/css/navBar.css">
     <link rel="stylesheet" href="assets/css/Category.css">
     <link rel="stylesheet" href="assets/css/post.css">
@@ -19,7 +19,7 @@
             <div class="links">
                 <a href="/">About & Home</a>
                 <a href="/category" id="categoryLink">Category</a>
-                <a href="#">{{.Username}}</a> <!-- Affiche l'username -->
+                <a href="#">{{.Username}}</a>
             </div>
             
             <div id="categoryDropdown" style="display: none;">
@@ -30,7 +30,7 @@
         </div>
         <div class="PostPrivate">
             <div class="usernamePrivate">
-                <a href="#">{{.Username}}</a> <!-- Affiche l'username -->
+                <a href="#">{{.Username}}</a>
             </div>
             <div class="contenant">
                 <label for="text">{{.SubjectName}}</label> <!-- Affiche le sujet -->
